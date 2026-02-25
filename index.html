@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,6 @@
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/png" href="logo.png">
     <style>
         * {
             margin: 0;
@@ -26,6 +25,12 @@
             direction: rtl;
             padding: 15px;
             color: #2e241f;
+            transition: all 0.3s ease;
+        }
+
+        body.ltr {
+            direction: ltr;
+            font-family: 'Montserrat', 'Cairo', sans-serif;
         }
 
         .menu-container {
@@ -37,7 +42,6 @@
             overflow: hidden;
         }
 
-        /* header بتصميم فاتح جداً */
         .menu-header {
             background: #fcf8f3;
             padding: 20px 30px;
@@ -57,12 +61,11 @@
         }
 
         .logo-img {
-            width: 400px;
+            width: 320px;
             height: auto;
-            background: transparent;
             object-fit: contain;
-            border-radius: 12px;
             transition: transform 0.3s ease;
+            margin-bottom: 5px;
         }
 
         .logo-img:hover {
@@ -72,60 +75,100 @@
         .logo-text {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding-top: 10px;
+        }
+
+        .brand-divider {
+            width: 100%;
+            max-width: 280px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #d4b595 50%, transparent 100%);
+            margin: 8px 0;
             position: relative;
         }
 
-        .logo-text h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #2c3e4e;
-            line-height: 1.2;
-            text-align: left;
-            margin-bottom: 5px;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #2c3e4e 0%, #4a627a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* .beauty-salon-text {
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #b28b67;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            display: inline-block;
-            padding-right: 15px;
-            border-right: 3px solid #d4b595;
-            line-height: 1.3;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-        } */
-
-        .beauty-salon-text span {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #9b7b5c;
-            margin: 0 5px;
-            text-transform: lowercase;
-        }
-
-        /* .beauty-salon-text::after {
+        .brand-divider::after {
             content: "✦";
             position: absolute;
-            left: -25px;
             top: 50%;
-            transform: translateY(-50%);
-            color: #d4b595;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fcf8f3;
+            padding: 0 10px;
+            color: #b28b67;
+            font-size: 0.8rem;
+        }
+
+        .beauty-salon-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #b28b67;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1;
+            margin-top: 5px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .lang-switch {
+            background: #ffffff;
+            border: 2px solid #d4b595;
+            color: #2c3e4e;
+            padding: 8px 20px;
+            border-radius: 50px;
             font-size: 1rem;
-            opacity: 0.7;
-        } */
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', 'Montserrat', sans-serif;
+        }
+
+        .lang-switch:hover {
+            background: #d4b595;
+            color: #ffffff;
+        }
+
+        .lang-switch i {
+            font-size: 1.1rem;
+        }
+
+        .location-btn {
+            background: #2c3e4e;
+            border: none;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .location-btn:hover {
+            background: #1a2632;
+            transform: scale(1.05);
+        }
+
+        .location-btn i {
+            color: #ffd966;
+        }
 
         .header-note {
             background: #2c3e4e;
@@ -159,7 +202,6 @@
             z-index: 1;
         }
 
-        /* شبكة البطاقات */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -204,7 +246,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /* font-family: 'Playfair Display', serif; */
         }
 
         .card-title i {
@@ -251,7 +292,6 @@
             padding-right: 8px;
             font-size: 1.1rem;
             border-right: 3px solid #d4b595;
-            /* font-family: 'Playfair Display', serif; */
         }
 
         .double-col {
@@ -279,7 +319,6 @@
             margin-left: 3px;
         }
 
-        /* الفوتر */
         .menu-footer {
             background: #2c3e4e;
             padding: 20px 30px;
@@ -310,64 +349,28 @@
             color: #ffffff;
         }
 
-        /* تحسين منطقة اللوجو والهوية */
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* توسيط العناصر */
-            position: relative;
-            padding-top: 10px;
-        }
-
-        .logo-img {
-            width: 320px;
-            /* حجم متناسق للوجو */
-            height: auto;
-            background: transparent;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-            margin-bottom: 5px;
-            /* مسافة قبل الخط */
-        }
-
-        /* الخط الفاصل الاحترافي */
-        .brand-divider {
-            width: 100%;
-            max-width: 280px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, #d4b595 50%, transparent 100%);
-            margin: 8px 0;
-            position: relative;
-        }
-
-        .brand-divider::after {
-            content: "✦";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fcf8f3;
-            /* نفس لون خلفية الهيدر لإخفاء الخط خلف النجمة */
-            padding: 0 10px;
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5rem;
             color: #b28b67;
-            font-size: 0.8rem;
+            grid-column: 1/-1;
         }
 
-        .beauty-salon-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #b28b67;
-            letter-spacing: 8px;
-            /* زيادة التباعد بين الحروف للفخامة */
-            text-transform: uppercase;
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1;
-            margin-top: 5px;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+        .loading-spinner i {
+            animation: spin 1s linear infinite;
         }
 
-        /* تصميم متجاوب للموبايل */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         @media (max-width: 1024px) {
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -396,25 +399,14 @@
                 width: 300px;
             }
 
-            .logo-text h1 {
-                font-size: 2rem;
-                text-align: center;
+            .header-controls {
+                justify-content: center;
             }
 
             .beauty-salon-text {
                 font-size: 1.2rem;
                 letter-spacing: 2px;
-                padding-right: 0;
-                border-right: none;
                 text-align: center;
-            }
-
-            .beauty-salon-text::after {
-                display: none;
-            }
-
-            .beauty-salon-text span {
-                font-size: 1.5rem;
             }
 
             .header-note {
@@ -457,324 +449,40 @@
                 justify-content: center;
             }
         }
-
-        /* للشاشات الصغيرة جداً */
-        @media (max-width: 380px) {
-            .price-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .price-value {
-                align-self: flex-end;
-            }
-
-            .double-col {
-                justify-content: center;
-            }
-        }
     </style>
 </head>
 
 <body>
     <div class="menu-container">
-        <!-- Header فاتح جداً عشان اللوجو الأسود يظهر -->
         <div class="menu-header">
             <div class="logo-container">
                 <div class="logo-text">
                     <img src="logo.png" alt="شعار تالوريا" class="logo-img" onerror="this.style.display='none'">
-
                     <div class="brand-divider"></div>
-
-                    <div class="beauty-salon-text">
-                        beauty salon
-                    </div>
+                    <div class="beauty-salon-text">beauty salon</div>
                 </div>
             </div>
 
-            <div class="header-note">
-                <i class="fas fa-crown"></i> أسعار منافسة · خدمات احترافية
+            <div class="header-controls">
+                <button class="lang-switch" id="langToggle">
+                    <i class="fas fa-globe"></i>
+                    <span id="langText">English</span>
+                </button>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=تالوريا+الرياض" target="_blank"
+                    class="location-btn" id="locationBtn">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="locationText">موقعنا</span>
+                </a>
             </div>
         </div>
 
-        <!-- بطاقات الخدمات -->
-        <div class="menu-grid">
-            <!-- 1. قص وتصفيف -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="قص شعر" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-cut"></i> قص وتصفيف</div>
-
-                    <div class="price-item"><span class="service-name">غسيل شعر</span><span class="price-value">75 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار قصير</span><span class="price-value">75
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار متوسط</span><span class="price-value">115
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار طويل</span><span class="price-value">115
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار ويفي قصير</span><span
-                            class="price-value">75 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار ويفي متوسط</span><span
-                            class="price-value">115 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار ويفي طويل</span><span
-                            class="price-value">115 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">قص</div>
-                    <div class="price-item"><span class="service-name">قص مكينة</span><span class="price-value">115 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">قص ستايل</span><span class="price-value">230 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">قص أطراف</span><span class="price-value">115 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">قص غرة</span><span class="price-value">288 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
-            </div>
-
-            <!-- 2. صبغات -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1605497184810-9ceb01d590b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="صبغات شعر" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-palette"></i> صبغات</div>
-
-                    <div class="price-item"><span class="service-name">صبغة جذور عادية</span><span
-                            class="price-value">345 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">جذور خدمة سريعة</span><span
-                            class="price-value">690 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">جذور بدون أمونيا</span><span
-                            class="price-value">828 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون واحد قصير جدا</span><span
-                            class="price-value">920 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون واحد للكتف</span><span
-                            class="price-value">1150 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون واحد متوسط</span><span
-                            class="price-value">920 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون واحد طويل</span><span class="price-value">380
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون واحد طويل جدا</span><span
-                            class="price-value">1610 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">صبغة + خصل قصير</span><span
-                            class="price-value">850 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">صبغة + خصل للكتف</span><span
-                            class="price-value">575-460 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">صبغة + خصل متوسط</span><span
-                            class="price-value">828 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">صبغة + خصل طويل</span><span
-                            class="price-value">920 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">رنساج</span><span class="price-value">1150 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
-            </div>
-
-            <!-- 3. عناية وتساريح -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="عناية بالشعر" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-spa"></i> عناية & تساريح</div>
-
-                    <div class="sub-category">معالجات حارة</div>
-                    <div class="price-item"><span class="service-name">شعر قصير</span><span class="price-value">828 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">شعر متوسط</span><span class="price-value">1610
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">شعر طويل</span><span class="price-value">1840
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">معالجات باردة</div>
-                    <div class="price-item"><span class="service-name">ديتوكس فروة</span><span class="price-value">288
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">حمام زيت عادي</span><span class="price-value">115
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">ترطيب وترميم</span><span class="price-value">172
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">معالجات باردة</span><span
-                            class="price-value">345-460 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">تساريح</div>
-                    <div class="price-item"><span class="service-name">شعر قصير جداً</span><span class="price-value">345
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">شعر متوسط</span><span class="price-value">460
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">شعر طويل</span><span class="price-value">690 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تسريحة Luxury</span><span class="price-value">828
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تسريحة عروس</span><span class="price-value">1380
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">الطفيرة الواحدة</span><span
-                            class="price-value">75 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">ستايل طفاير</span><span class="price-value">115
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
-            </div>
-
-            <!-- 4. رموش · مكياج · حواجب -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1631214524020-3c1d9e5ef268?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="مكياج ورموش" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-eye"></i> رموش · مكياج · حواجب</div>
-
-                    <div class="double-col">
-                        <div class="chip-price">رموش <span>460</span> <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></div>
-                        <div class="chip-price">رموش <span>230</span> <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></div>
-                        <div class="chip-price">رموش <span>345</span> <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></div>
-                        <div class="chip-price">رموش <span>115</span> <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></div>
-                        <div class="chip-price">رموش <span>68</span> <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></div>
-                    </div>
-
-                    <div class="price-item"><span class="service-name">مكياج</span><span class="price-value">300 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">مكياج + رموش</span><span class="price-value">350
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">الشمع</div>
-                    <div class="price-item"><span class="service-name">وجه كامل</span><span class="price-value">85 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">حواجب</span><span class="price-value">55 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">شنب</span><span class="price-value">45 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">نص اليد</span><span class="price-value">80 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">كامل اليد</span><span class="price-value">150
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">نص الأرجل</span><span class="price-value">100
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">كامل الأرجل</span><span class="price-value">200
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">حواجب</div>
-                    <div class="price-item"><span class="service-name">تشقير</span><span class="price-value">45 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">صبغة</span><span class="price-value">45 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
-            </div>
-
-            <!-- 5. الأظافر -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1610992015732-2449b0bb0a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="أظافر" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-hand-sparkles"></i> الأظافر</div>
-
-                    <div class="price-item"><span class="service-name">لون عادي</span><span class="price-value">38 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون فريش</span><span class="price-value">68 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">رسم للظفر الواحد</span><span
-                            class="price-value">15 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">بدكير</span><span class="price-value">115 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">مناكير</span><span class="price-value">115 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تركيب أظافر عادية</span><span
-                            class="price-value">115 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">أظافر جل</span><span class="price-value">345 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">بولي جل</span><span class="price-value">345 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">اكستنشن بيا</span><span class="price-value">288
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون بيا</span><span class="price-value">172 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">لون جل</span><span class="price-value">288 <img
-                                src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تنظيف + لون جل</span><span
-                            class="price-value">115 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">إزالة جل كلر</span><span class="price-value">230
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">إزالة اكستنشن جل</span><span
-                            class="price-value">172 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">رشن مناكير</span><span class="price-value">288
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
-            </div>
-
-            <!-- 6. أطفال + مساج + تنظيف -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="مساج وعناية" class="card-image" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title"><i class="fas fa-child"></i> أطفال · مساج · عناية</div>
-
-                    <div class="sub-category">أطفال (شعر)</div>
-                    <div class="price-item"><span class="service-name">غسيل شعر</span><span class="price-value">28/100
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار قصير</span><span class="price-value">170
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار متوسط</span><span class="price-value">200
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">استشوار طويل</span><span class="price-value">100
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تسريحة قصير</span><span class="price-value">130
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تسريحة متوسط</span><span class="price-value">150
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تسريحة طويل</span><span class="price-value">19
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تركيب اكسسوار</span><span class="price-value">100
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">مساج</div>
-                    <div class="price-item"><span class="service-name">1 Hour مساج تايلندي</span><span
-                            class="price-value">300 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">أحجار ساخنة</span><span class="price-value">300
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">مساج كاسات</span><span class="price-value">240
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">مساج شياتسو</span><span class="price-value">250
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">ريفلوكسجي</span><span class="price-value">300
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">مكس (سويدي+تايلندي)</span><span
-                            class="price-value">300 <img src="Riyal.png" class="rial-img"
-                                onerror="this.style.display='none'"></span></div>
-
-                    <div class="sub-category">تنظيف بشرة</div>
-                    <div class="price-item"><span class="service-name">تنظيف عادي</span><span class="price-value">249
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">تنظيف عميق</span><span class="price-value">349
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                    <div class="price-item"><span class="service-name">هايرافيشيل</span><span class="price-value">544
-                            <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span></div>
-                </div>
+        <div class="menu-grid" id="menuGrid">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> <span id="loadingText">جاري تحميل الأسعار...</span>
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="menu-footer">
             <div class="footer-note"><i class="fas fa-phone-alt"></i> +966 50 123 4567</div>
             <div class="footer-icons">
@@ -782,10 +490,167 @@
                 <i class="fab fa-snapchat"></i>
                 <i class="fab fa-whatsapp"></i>
             </div>
-            <div class="footer-note"><img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"> جميع
-                الأسعار بالريال</div>
+            <div class="footer-note"><img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"> <span
+                    id="currencyText">جميع الأسعار بالريال</span></div>
         </div>
     </div>
+
+    <script>
+        const API_KEY = 'AIzaSyD_pSB9YnjG5vVqsizCca8kkhqMxikr2BA';
+        const SPREADSHEET_ID = '15UMtfSSbwChfGofZMOjKsf5XbKhe-suL8x2EmeysncI';
+        const RANGE = 'Sheet1!A:G'; // 🟢 7 أعمدة دلوقتي
+
+        let currentLang = 'ar'; // اللغة الافتراضية
+        let servicesData = [];
+
+        // عناصر الترجمة
+        const translations = {
+            ar: {
+                langBtn: 'English',
+                location: 'موقعنا',
+                loading: 'جاري تحميل الأسعار...',
+                currency: 'جميع الأسعار بالريال',
+                error: 'عذراً، حدث خطأ في تحميل الأسعار',
+                noServices: 'لا توجد خدمات متاحة'
+            },
+            en: {
+                langBtn: 'عربي',
+                location: 'Our Location',
+                loading: 'Loading prices...',
+                currency: 'All prices in SAR',
+                error: 'Sorry, error loading prices',
+                noServices: 'No services available'
+            }
+        };
+
+        async function fetchPrices() {
+            try {
+                const response = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`
+                );
+
+                if (!response.ok) {
+                    throw new Error('فشل في تحميل البيانات');
+                }
+
+                const data = await response.json();
+                servicesData = processSheetData(data.values);
+                renderServices(servicesData);
+            } catch (error) {
+                console.error('خطأ:', error);
+                document.getElementById('menuGrid').innerHTML = `
+                    <div style="text-align: center; padding: 50px; color: #b28b67; grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <p>${translations[currentLang].error}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function processSheetData(rows) {
+            if (!rows || rows.length < 2) return [];
+
+            const categoriesMap = new Map();
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.length < 7) continue;
+
+                const categoryAr = row[0];
+                const categoryEn = row[1];
+                const icon = row[2];
+                const image = row[3];
+                const itemNameAr = row[4];
+                const itemNameEn = row[5];
+                const price = row[6];
+
+                // نستخدم التصنيف العربي كمعرف فريد للتجميع فقط
+                if (!categoriesMap.has(categoryAr)) {
+                    categoriesMap.set(categoryAr, {
+                        nameAr: categoryAr,
+                        nameEn: categoryEn,
+                        icon: icon || 'fa-cut',
+                        image: image || 'https://images.unsplash.com/photo-1560869713-7d0a29430803',
+                        items: []
+                    });
+                }
+
+                categoriesMap.get(categoryAr).items.push({
+                    nameAr: itemNameAr,
+                    nameEn: itemNameEn,
+                    price: price
+                });
+            }
+
+            return Array.from(categoriesMap.values());
+        }
+
+        function renderServices(services) {
+            const grid = document.getElementById('menuGrid');
+            if (!services || services.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px;">${translations[currentLang].noServices}</div>`;
+                return;
+            }
+
+            let html = '';
+            services.forEach(service => {
+                // اختيار اسم القسم بناءً على اللغة
+                const categoryName = currentLang === 'ar' ? service.nameAr : (service.nameEn || service.nameAr);
+
+                html += `
+            <div class="service-card">
+                <img src="${service.image}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1560869713-7d0a29430803'">
+                <div class="card-content">
+                    <div class="card-title">
+                        <i class="fas ${service.icon}"></i> ${categoryName}
+                    </div>
+                    ${service.items.map(item => {
+                    // اختيار اسم الخدمة بناءً على اللغة
+                    const itemName = currentLang === 'ar' ? item.nameAr : (item.nameEn || item.nameAr);
+                    return `
+                            <div class="price-item">
+                                <span class="service-name">${itemName}</span>
+                                <span class="price-value">${item.price} <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'"></span>
+                            </div>
+                        `;
+                }).join('')}
+                </div>
+            </div>
+        `;
+            });
+            grid.innerHTML = html;
+        }
+        function toggleLanguage() {
+            // تبديل اللغة
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+
+            // تغيير اتجاه الصفحة
+            document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.body.classList.toggle('ltr', currentLang === 'en');
+
+            // تحديث النصوص
+            const langEl = document.getElementById('langText');
+            const locationEl = document.getElementById('locationText');
+            const loadingEl = document.getElementById('loadingText');
+            const currencyEl = document.getElementById('currencyText');
+
+            if (langEl) langEl.textContent = translations[currentLang].langBtn;
+            if (locationEl) locationEl.textContent = translations[currentLang].location;
+            if (loadingEl) loadingEl.textContent = translations[currentLang].loading;
+            if (currencyEl) currencyEl.textContent = translations[currentLang].currency;
+
+            // تحديث البيانات المعروضة
+            if (servicesData.length > 0) {
+                renderServices(servicesData);
+            }
+        }
+
+        // حدث زر تغيير اللغة
+        document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+
+        // تحميل البيانات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', fetchPrices);
+    </script>
 </body>
 
 </html>
