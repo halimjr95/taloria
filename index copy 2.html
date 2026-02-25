@@ -337,16 +337,67 @@
             font-size: 0.95rem;
         }
 
-        .footer-icons i {
-            font-size: 1.4rem;
-            margin: 0 8px;
-            color: #ffd966;
-            transition: 0.2s;
+        .footer-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        .footer-icons i:hover {
+        .footer-icons a {
+            color: #ffd966;
+            font-size: 1.4rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .footer-icons a:hover {
             transform: scale(1.1);
             color: #ffffff;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding: 5px 10px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .contact-link i {
+            color: #ffd966;
+        }
+
+        .tax-note {
+            text-align: center;
+            padding: 15px 20px;
+            background: #f8f4f0;
+            color: #2c3e4e;
+            font-size: 1rem;
+            font-weight: 600;
+            border-top: 2px solid #d4b595;
+            letter-spacing: 0.5px;
+        }
+
+        .tax-note i {
+            color: #b28b67;
+            margin-left: 5px;
         }
 
         .loading-spinner {
@@ -439,31 +490,19 @@
             }
 
             .menu-footer {
-                padding: 15px;
+                padding: 20px;
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
                 text-align: center;
+            }
+
+            .footer-contact {
+                justify-content: center;
             }
 
             .footer-note {
                 justify-content: center;
             }
-        }
-
-        .tax-note {
-            text-align: center;
-            padding: 15px 20px;
-            background: #f8f4f0;
-            color: #2c3e4e;
-            font-size: 1rem;
-            font-weight: 600;
-            border-top: 2px solid #d4b595;
-            letter-spacing: 0.5px;
-        }
-
-        .tax-note i {
-            color: #b28b67;
-            margin-left: 5px;
         }
     </style>
 </head>
@@ -499,6 +538,7 @@
             </div>
         </div>
 
+        <!-- ✅ ملاحظة الضريبة -->
         <div class="tax-note" id="taxNote">
             <i class="fas fa-percent"></i>
             <span id="taxText">جميع الأسعار تشمل ضريبة القيمة المضافة</span>
@@ -506,9 +546,18 @@
 
         <div class="menu-footer">
             <div class="footer-contact">
+                <!-- اتصال -->
+                <!-- <a href="tel:+9660539744410" class="contact-link" id="callLink">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>اتصال</span>
+                </a> -->
+                <!-- واتساب -->
+                <!-- <a href="https://wa.me/9660539744410" target="_blank" class="contact-link" id="whatsappLink">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>واتساب</span>
+                </a>-->
+
             </div>
-
-
 
             <div class="footer-icons">
                 <a href="tel:+9660539744410" id="callLink">
@@ -529,38 +578,43 @@
                     <i class="fa-brands fa-x-twitter"></i>
             </div>
 
-
+            <!-- <div class="footer-note">
+                    <img src="Riyal.png" class="rial-img" onerror="this.style.display='none'">
+                    <span id="currencyText">جميع الأسعار بالريال</span>
+                </div> -->
         </div>
     </div>
 
     <script>
         const API_KEY = 'AIzaSyD_pSB9YnjG5vVqsizCca8kkhqMxikr2BA';
         const SPREADSHEET_ID = '15UMtfSSbwChfGofZMOjKsf5XbKhe-suL8x2EmeysncI';
-        const RANGE = 'Sheet1!A:G'; // 🟢 7 أعمدة دلوقتي
+        const RANGE = 'Sheet1!A:G';
 
-        let currentLang = 'ar'; // اللغة الافتراضية
+        let currentLang = 'ar';
         let servicesData = [];
 
-        // عناصر الترجمة
         const translations = {
             ar: {
                 langBtn: 'English',
                 location: 'موقعنا',
                 loading: 'جاري تحميل الأسعار...',
                 currency: 'جميع الأسعار بالريال',
+                taxNote: 'جميع الأسعار تشمل ضريبة القيمة المضافة',
                 error: 'عذراً، حدث خطأ في تحميل الأسعار',
-                taxNote: 'جميع الأسعار تشمل ضريبة القيمة المضافة', // 👈 أضف هذا السطر للعربي
-                noServices: 'لا توجد خدمات متاحة'
-
+                noServices: 'لا توجد خدمات متاحة',
+                call: 'اتصال',
+                whatsapp: 'واتساب'
             },
             en: {
                 langBtn: 'عربي',
                 location: 'Our Location',
                 loading: 'Loading prices...',
                 currency: 'All prices in SAR',
+                taxNote: 'All prices include VAT',
                 error: 'Sorry, error loading prices',
-                taxNote: 'All prices include VAT', // 👈 وأضف هذا السطر للإنجليزي
-                noServices: 'No services available'
+                noServices: 'No services available',
+                call: 'Call',
+                whatsapp: 'WhatsApp'
             }
         };
 
@@ -605,7 +659,6 @@
                 const itemNameEn = row[5];
                 const price = row[6];
 
-                // نستخدم التصنيف العربي كمعرف فريد للتجميع فقط
                 if (!categoriesMap.has(categoryAr)) {
                     categoriesMap.set(categoryAr, {
                         nameAr: categoryAr,
@@ -635,7 +688,6 @@
 
             let html = '';
             services.forEach(service => {
-                // اختيار اسم القسم بناءً على اللغة
                 const categoryName = currentLang === 'ar' ? service.nameAr : (service.nameEn || service.nameAr);
 
                 html += `
@@ -646,7 +698,6 @@
                         <i class="fas ${service.icon}"></i> ${categoryName}
                     </div>
                     ${service.items.map(item => {
-                    // اختيار اسم الخدمة بناءً على اللغة
                     const itemName = currentLang === 'ar' ? item.nameAr : (item.nameEn || item.nameAr);
                     return `
                             <div class="price-item">
@@ -661,38 +712,32 @@
             });
             grid.innerHTML = html;
         }
+
         function toggleLanguage() {
-            // تبديل اللغة
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
 
-            // تغيير اتجاه الصفحة
             document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             document.body.classList.toggle('ltr', currentLang === 'en');
 
-            // تحديث النصوص
-            const langEl = document.getElementById('langText');
-            const locationEl = document.getElementById('locationText');
-            const loadingEl = document.getElementById('loadingText');
-            const currencyEl = document.getElementById('currencyText');
-            const taxEl = document.getElementById('taxText'); // 👈 أضف هذا السطر
+            // تحديث كل النصوص
+            document.getElementById('langText').textContent = translations[currentLang].langBtn;
+            document.getElementById('locationText').textContent = translations[currentLang].location;
+            document.getElementById('loadingText').textContent = translations[currentLang].loading;
+            document.getElementById('currencyText').textContent = translations[currentLang].currency;
+            document.getElementById('taxText').textContent = translations[currentLang].taxNote;
 
+            // تحديث روابط الاتصال
+            document.querySelectorAll('.contact-link span').forEach((span, index) => {
+                if (index === 0) span.textContent = translations[currentLang].call;
+                if (index === 1) span.textContent = translations[currentLang].whatsapp;
+            });
 
-            if (langEl) langEl.textContent = translations[currentLang].langBtn;
-            if (locationEl) locationEl.textContent = translations[currentLang].location;
-            if (loadingEl) loadingEl.textContent = translations[currentLang].loading;
-            if (currencyEl) currencyEl.textContent = translations[currentLang].currency;
-            if (taxEl) taxEl.textContent = translations[currentLang].taxNote; // 👈 وأضف هذا السطر
-
-            // تحديث البيانات المعروضة
             if (servicesData.length > 0) {
                 renderServices(servicesData);
             }
         }
 
-        // حدث زر تغيير اللغة
         document.getElementById('langToggle').addEventListener('click', toggleLanguage);
-
-        // تحميل البيانات عند فتح الصفحة
         document.addEventListener('DOMContentLoaded', fetchPrices);
     </script>
 </body>
